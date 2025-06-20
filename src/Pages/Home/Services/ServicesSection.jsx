@@ -23,7 +23,6 @@ const servicesData = [
     title: "Nationwide Delivery",
     description:
       "We deliver parcels nationwide with home delivery in every district, ensuring your products reach customers within 48–72 hours.",
-    bg: "#CAEB66",
   },
   {
     Icon: FiBox,
@@ -69,7 +68,6 @@ const ServicesSection = () => {
           key={idx} 
           service={service} 
           Icon={service.Icon} 
-          bg={service.bg}
           />
         ))}
       </div>
