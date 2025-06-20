@@ -12,22 +12,22 @@ import logo7 from "../../../assets/brands/amazon_vector.png";
 const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7];
 const ClientSlider = () => {
   return (
-    <section className="w-full pt-[50px] pb-[100px]">
-      <h2 className="text-3xl font-bold text-center text-[#03373D] mb-8">
-        Trusted by 100+ Companies
+    <section className="w-full pt-[25px] pb-[50px] md:pt-[50px] md:pb-[100px]">
+      <h2 className="text-xl md:text-[28px] font-bold md:font-extrabold text-center text-[#03373D] mb-8">
+        We've helped thousands of sales teams
       </h2>
       <Marquee
         speed={50}
         gradient={false}
         pauseOnHover={true}
-        className="flex gap-16"
+        className="flex gap-8 md:gap-16"
       >
         {logos.map((logo, index) => (
           <img
             key={index}
             src={logo}
             alt={`client-${index}`}
-            className="transition mx-10 duration-300"
+            className="transition mx-5 md:mx-10 duration-300"
           />
         ))}
       </Marquee>
