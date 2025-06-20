@@ -6,9 +6,15 @@ import Footer from '../Pages/shared/Footer/Footer';
 const RootLayout = () => {
     return (
         <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
+            <header className='max-w-[1500px] mx-auto px-4 py-8'>
+                <Navbar></Navbar>
+            </header>
+            <main className='min-h-[calc(100vh-200px)] max-w-[1500px] mx-auto px-4'>
+                <Outlet></Outlet>
+            </main>
+            <footer className='max-w-[1500px] mx-auto px-4 py-6'>
+                <Footer></Footer>
+            </footer>
         </div>
     );
 };
