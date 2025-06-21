@@ -14,7 +14,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 shadow-sm rounded-2xl px-4 lg:px-8">
+    <div className="navbar bg-secondary shadow-sm rounded-2xl px-4 lg:px-8">
       {/* Navbar Start */}
       <div className="flex items-center gap-2 navbar-start">
         {/* Hamburger on md and below (hidden on lg) */}
@@ -37,7 +37,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[100] p-4 shadow bg-base-100 rounded-box w-60"
+            className="menu menu-sm dropdown-content mt-3 z-[100] p-4 shadow bg-secondary rounded-box w-60"
           >
             {navItems}
             <li className="mt-2">
