@@ -1,15 +1,20 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import ProFastLogo from "../ProfastLogo/ProFastLogo";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <NavLink className="font-medium text-[16px] text-[#606060]" to="/">Home</NavLink>
+        <NavLink className="font-medium text-[16px] text-[#606060]" to="/">
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink className="font-medium text-[16px] text-[#606060]" to="/about">About Us</NavLink>
+        <NavLink className="font-medium text-[16px] text-[#606060]" to="/about">
+          About Us
+        </NavLink>
       </li>
     </>
   );
@@ -40,9 +45,6 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 z-[100] p-4 shadow bg-secondary rounded-box w-60"
           >
             {navItems}
-            <li className="mt-2">
-              <a className="btn btn-primary w-full">Button</a>
-            </li>
           </ul>
         </div>
 
@@ -53,15 +55,25 @@ const Navbar = () => {
       </div>
 
       {/* Navbar Center (only on lg and up) */}
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-start hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
 
       {/* Navbar End */}
       <div className="navbar-end flex items-center gap-2">
         {/* Button on md and up */}
-        <div className="hidden md:block">
-          <a className="btn btn-primary">Button</a>
+        <div className="hidden md:flex gap-4">
+          <Link className="text-xl text-base-200 font-bold py-4 px-8 rounded-xl bg-secondary border border-base-100 hover:bg-neutral hover:text-base-300 transition-colors duration-300">
+            Sign In
+          </Link>
+          <div className="flex items-center gap-1">
+            <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
+              Be a rider
+            </Link>
+            <Link className="p-3 bg-base-300 rounded-full text-neutral">
+              <FiArrowUpRight className="w-8 h-8" />
+            </Link>
+          </div>
         </div>
 
         {/* Hamburger on mobile (sm only) */}
@@ -84,11 +96,21 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[100] p-4 shadow bg-base-100 rounded-box w-60"
+            className="menu menu-sm dropdown-content mt-3 z-[100] p-4 shadow bg-secondary rounded-box w-60"
           >
             {navItems}
             <li className="mt-2">
-              <a className="btn btn-primary w-full">Button</a>
+              <Link className="text-xl text-base-200 font-bold py-4 px-8 rounded-xl bg-secondary border border-base-100 hover:bg-neutral hover:text-base-300 transition-colors duration-300">
+                Sign In
+              </Link>
+              <div className="flex items-center gap-1">
+                <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
+                  Be a rider
+                </Link>
+                <Link className="p-3 bg-base-300 rounded-full text-neutral">
+                  <FiArrowUpRight className="w-8 h-8" />
+                </Link>
+              </div>
             </li>
           </ul>
         </div>
