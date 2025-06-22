@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 
-const Login = () => {
+const Register = () => {
   const {
     register,
     handleSubmit,
@@ -17,13 +17,28 @@ const Login = () => {
   return (
     <div className="bg-white w-full">
       <h2 className="text-4xl md:text-[42px] inter font-bold md:font-extrabold text-[#000000] mb-2">
-        Welcome Back
+        Create an Account
       </h2>
       <p className="lxgw-marker-gothic text-[#0F172A] mb-6">
-        Login with Profast
+        Register with Profast
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Name */}
+        <div>
+          <label className="label">
+            <span className="label-text text-[#0F172A] font-medium lxgw-marker-gothic">
+              Name
+            </span>
+          </label>
+          <input
+            type="text"
+            {...register("name", { required: true, maxLength: 50 })}
+            placeholder="Email"
+            className="input text-slate-400 lxgw-marker-gothic focus:border focus:border-[#E9ECF1] w-full"
+          />
+        </div>
+
         {/* Email */}
         <div>
           <label className="label">
@@ -76,31 +91,20 @@ const Login = () => {
           )}
         </div>
 
-        {/* Forgot Password */}
-        <div className="text-right text-sm">
-          <Link
-            to="/forgot-password"
-            className="text-zinc-500
-           hover:underline"
-          >
-            Forget Password?
-          </Link>
-        </div>
-
-        {/* Login Button */}
+        {/* Register Button */}
         <button className="btn bg-[#CAEB66] hover:bg-[#b3d455] w-full text-black font-semibold border-none">
-          Login
+          Register
         </button>
       </form>
 
       {/* Register Link */}
       <p className="text-center text-zinc-500 text-sm mt-4">
-        Don’t have any account?{" "}
+        Already have an account?{" "}
         <Link
-          to="/register"
+          to="/login"
           className="text-[#8FA748] font-medium hover:underline"
         >
-          Register
+          Login
         </Link>
       </p>
 
@@ -116,4 +120,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
