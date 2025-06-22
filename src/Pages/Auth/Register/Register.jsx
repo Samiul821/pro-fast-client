@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
+import imageUpload from "../../../assets/image-upload-icon.png";
 
 const Register = () => {
   const {
@@ -24,6 +25,10 @@ const Register = () => {
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <img src={imageUpload} alt="" />
+        </div>
+
         {/* Name */}
         <div>
           <label className="label">
