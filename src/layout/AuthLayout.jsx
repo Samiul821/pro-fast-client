@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import authImage from "../assets/authImage.png";
 import ProFastLogo from "../Pages/shared/ProfastLogo/ProFastLogo";
 
@@ -9,7 +9,7 @@ const AuthLayout = () => {
       {/* 🔒 Fixed Logo - Top Left */}
       <div className="absolute top-4 left-4 md:top-6 md:left-8 z-50">
         <div className="w-24 md:w-32">
-          <ProFastLogo />
+          <Link to="/"><ProFastLogo /></Link>
         </div>
       </div>
 

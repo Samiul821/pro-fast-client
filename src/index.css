@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=LXGW+Marker+Gothic&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import "tailwindcss";
  @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
@@ -11,6 +12,18 @@
   --color-primary: #03373D;
   --color-secondary: white;
   --color-neutral: #CAEB66;
+}
+
+.inter {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.lxgw-marker-gothic {
+  font-family: 'LXGW Marker Gothic', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .urbanist {
