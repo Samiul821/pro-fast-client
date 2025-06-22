@@ -9,7 +9,7 @@ const BeMarchant = () => {
         <h1 className="text-secondary text-2xl sm:text-4xl md:text-[40px] font-extrabold mb-6 leading-tight">
           Merchant and Customer Satisfaction <br className="hidden md:block" /> is Our First Priority
         </h1>
-        <p className="text-base-100 mb-8 sm:text-lg leading-relaxed">
+        <p className="text-[#DADADA] mb-8 sm:text-lg leading-relaxed">
           We offer the lowest delivery charge with the highest value along with{" "}
           <br className="hidden md:block" />
           100% safety of your product. Pathao courier delivers your parcels in
@@ -18,10 +18,10 @@ const BeMarchant = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-          <button className="text-base-300 text-lg sm:text-xl font-bold py-4 px-8 rounded-full bg-[#CAEB66] cursor-pointer hover:brightness-95 transition">
+          <button className="text-[#1F1F1F] text-lg sm:text-xl font-bold py-4 px-8 rounded-full bg-[#CAEB66] cursor-pointer hover:brightness-95 transition">
             Become a Merchant
           </button>
-          <button className="text-neutral hover:text-base-300 text-lg sm:text-xl font-bold py-4 px-8 border border-[#CAEB66] rounded-full hover:bg-[#CAEB66] cursor-pointer transition">
+          <button className="text-neutral hover:text-[#1F1F1F] text-lg sm:text-xl font-bold py-4 px-8 border border-[#CAEB66] rounded-full hover:bg-[#CAEB66] cursor-pointer transition">
             Earn with Profast Courier
           </button>
         </div>

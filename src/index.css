@@ -10,9 +10,6 @@
   default: true;
   --color-primary: #03373D;
   --color-secondary: white;
-  --color-base-100: #DADADA;
-  --color-base-200: #606060;
-  --color-base-300: #1F1F1F;
   --color-neutral: #CAEB66;
 }
 

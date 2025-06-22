@@ -63,14 +63,17 @@ const Navbar = () => {
       <div className="navbar-end flex items-center gap-2">
         {/* Button on md and up */}
         <div className="hidden md:flex gap-4">
-          <Link className="text-xl text-base-200 font-bold py-4 px-8 rounded-xl bg-secondary border border-base-100 hover:bg-neutral hover:text-base-300 transition-colors duration-300">
+          <Link
+            to="/login"
+            className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-neutral hover:text-[#1F1F1F] transition-colors duration-300"
+          >
             Sign In
           </Link>
           <div className="flex items-center gap-1">
             <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
               Be a rider
             </Link>
-            <Link className="p-3 bg-base-300 rounded-full text-neutral">
+            <Link className="p-3 bg-[#1F1F1F] rounded-full text-neutral">
               <FiArrowUpRight className="w-8 h-8" />
             </Link>
           </div>
@@ -100,14 +103,17 @@ const Navbar = () => {
           >
             {navItems}
             <li className="mt-2">
-              <Link className="text-xl text-base-200 font-bold py-4 px-8 rounded-xl bg-secondary border border-base-100 hover:bg-neutral hover:text-base-300 transition-colors duration-300">
+              <Link
+                to="/login"
+                className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-neutral hover:text-[#1F1F1F] transition-colors duration-300"
+              >
                 Sign In
               </Link>
               <div className="flex items-center gap-1">
                 <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
                   Be a rider
                 </Link>
-                <Link className="p-3 bg-base-300 rounded-full text-neutral">
+                <Link className="p-3 bg-[#1F1F1F] rounded-full text-neutral">
                   <FiArrowUpRight className="w-8 h-8" />
                 </Link>
               </div>

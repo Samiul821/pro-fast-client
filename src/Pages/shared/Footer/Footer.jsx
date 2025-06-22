@@ -8,7 +8,7 @@ import youtube from "../../../assets/youtube.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0B0B0B] text-base-100 px-6 py-10 md:p-20 rounded-2xl space-y-8">
+    <footer className="bg-[#0B0B0B] text-[#DADADA] px-6 py-10 md:p-20 rounded-2xl space-y-8">
       {/* Logo + Description */}
       <aside className="flex flex-col items-center text-center gap-4 max-w-4xl mx-auto">
         <ProFastLogo />

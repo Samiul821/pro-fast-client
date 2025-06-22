@@ -5,7 +5,7 @@ const FAQSection = () => {
   return (
     <div className="pb-20">
       <div className="flex flex-col items-center justify-center gap-4 max-w-6xl mx-auto">
-        <div className="collapse collapse-arrow border border-base-300">
+        <div className="collapse collapse-arrow border border-[#1F1F1F]">
           <input type="radio" name="my-accordion-2" defaultChecked />
           <div className="collapse-title font-semibold">
             How do I create an account?
@@ -15,7 +15,7 @@ const FAQSection = () => {
             registration process.
           </div>
         </div>
-        <div className="collapse collapse-arrow border border-base-300">
+        <div className="collapse collapse-arrow border border-[#1F1F1F]">
           <input type="radio" name="my-accordion-2" />
           <div className="collapse-title font-semibold">
             I forgot my password. What should I do?
@@ -25,7 +25,7 @@ const FAQSection = () => {
             instructions sent to your email.
           </div>
         </div>
-        <div className="collapse collapse-arrow border border-base-300">
+        <div className="collapse collapse-arrow border border-[#1F1F1F]">
           <input type="radio" name="my-accordion-2" />
           <div className="collapse-title font-semibold">
             How do I update my profile information?

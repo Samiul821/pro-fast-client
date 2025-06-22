@@ -11,7 +11,7 @@ Aos.init()
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <div className="urbanist bg-[#EAECED]">
+    <div className="urbanist">
       <RouterProvider router={router} />
     </div>
   </StrictMode>
