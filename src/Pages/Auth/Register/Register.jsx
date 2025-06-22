@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import imageUpload from "../../../assets/image-upload-icon.png";
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const {
@@ -10,9 +12,30 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { createUser, updateUser, setUser } = useAuth();
 
   const onSubmit = (data) => {
     console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+
+        // Update user profile with name
+        updateUser({ displayName: data.name })
+          .then(() => {
+            setUser({ ...user, displayName: data.name });
+            console.log("User created successfully:", user);
+            toast.success("User created successfully!");
+          })
+          .catch((error) => {
+            console.error("Error updating user profile:", error);
+            toast.error("Failed to update user profile. Please try again.");
+          });
+      })
+      .catch((error) => {
+        console.error("Error creating user:", error);
+        toast.error("Failed to create user. Please try again.");
+      });
   };
 
   return (
