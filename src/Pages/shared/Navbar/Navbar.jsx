@@ -2,8 +2,23 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import ProFastLogo from "../ProfastLogo/ProFastLogo";
 import { FiArrowUpRight } from "react-icons/fi";
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logged out successfully!");
+      })
+      .catch((error) => {
+        toast.error("Failed to log out. Please try again.");
+        console.error("Logout error:", error);
+      });
+  };
+
   const navItems = (
     <>
       <li>
@@ -63,12 +78,21 @@ const Navbar = () => {
       <div className="navbar-end flex items-center gap-2">
         {/* Button on md and up */}
         <div className="hidden md:flex gap-4">
-          <Link
-            to="/login"
-            className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-neutral hover:text-[#1F1F1F] transition-colors duration-300"
-          >
-            Sign In
-          </Link>
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-red-400 hover:text-white transition-colors duration-300 cursor-pointer"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-neutral hover:text-[#1F1F1F] transition-colors duration-300"
+            >
+              Sign In
+            </Link>
+          )}
           <div className="flex items-center gap-1">
             <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
               Be a rider
@@ -103,18 +127,24 @@ const Navbar = () => {
           >
             {navItems}
             <li className="mt-2">
-              <Link
-                to="/login"
-                className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-neutral hover:text-[#1F1F1F] transition-colors duration-300"
-              >
-                Sign In
-              </Link>
+              {user ? (
+                <button
+                  onClick={handleLogout}
+                  className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-red-400 hover:text-white transition-colors duration-300"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-neutral hover:text-[#1F1F1F] transition-colors duration-300"
+                >
+                  Sign In
+                </Link>
+              )}
               <div className="flex items-center gap-1">
                 <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
                   Be a rider
-                </Link>
-                <Link className="p-3 bg-[#1F1F1F] rounded-full text-neutral">
-                  <FiArrowUpRight className="w-8 h-8" />
                 </Link>
               </div>
             </li>

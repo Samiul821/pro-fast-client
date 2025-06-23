@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin.jsx/SocialLogin";
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -10,8 +12,24 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const onSubmit = (data) => {
     console.log(data);
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        toast.success("User logged in successfully!");
+        // Redirect to the previous page or home page
+        navigate(`${location.state?.from || "/"}`, { replace: true });
+        console.log("User logged in successfully:", user);
+      })
+      .catch((error) => {
+        toast.error("Failed to log in. Please check your credentials.");
+        console.error("Error logging in:", error);
+      });
   };
 
   return (

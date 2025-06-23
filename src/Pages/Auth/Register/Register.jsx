@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import imageUpload from "../../../assets/image-upload-icon.png";
 import useAuth from "../../../hooks/useAuth";
@@ -13,6 +13,8 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const { createUser, updateUser, setUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -26,6 +28,8 @@ const Register = () => {
             setUser({ ...user, displayName: data.name });
             console.log("User created successfully:", user);
             toast.success("User created successfully!");
+            // Redirect to the previous page or home page
+            navigate(`${location.state?.from || "/"}`, { replace: true });
           })
           .catch((error) => {
             console.error("Error updating user profile:", error);

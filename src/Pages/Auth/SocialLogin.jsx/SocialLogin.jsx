@@ -2,9 +2,12 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -12,6 +15,9 @@ const SocialLogin = () => {
         const user = result.user;
         console.log("Google Sign In User:", user);
         toast.success("Logged in successfully with Google!");
+        // Redirect to the previous page or home page
+        const redirectPath = location?.state?.from || "/";
+        navigate(redirectPath, { replace: true });
       })
       .catch((error) => {
         console.error("Google Sign In Error:", error);
