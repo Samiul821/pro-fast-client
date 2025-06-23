@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import imageUpload from "../../../assets/image-upload-icon.png";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
+import SocialLogin from "../SocialLogin.jsx/SocialLogin";
 
 const Register = () => {
   const {
@@ -136,14 +136,7 @@ const Register = () => {
         </Link>
       </p>
 
-      {/* OR Divider */}
-      <div className="divider my-4 text-sm">Or</div>
-
-      {/* Google Login */}
-      <button className="btn w-full border border-base-200">
-        <FcGoogle size={20} className="mr-2" />
-        Login with Google
-      </button>
+      <SocialLogin />
     </div>
   );
 };

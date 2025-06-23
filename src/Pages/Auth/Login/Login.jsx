@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
+import SocialLogin from "../SocialLogin.jsx/SocialLogin";
 
 const Login = () => {
   const {
@@ -104,14 +104,8 @@ const Login = () => {
         </Link>
       </p>
 
-      {/* OR Divider */}
-      <div className="divider my-4 text-sm">Or</div>
-
-      {/* Google Login */}
-      <button className="btn w-full border border-base-200">
-        <FcGoogle size={20} className="mr-2" />
-        Login with Google
-      </button>
+      {/* Social Login */}
+      <SocialLogin />
     </div>
   );
 };
