@@ -4,6 +4,8 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Auth/Login/Login";
 import AuthLayout from "../layout/AuthLayout";
 import Register from "../Pages/Auth/Register/Register";
+import Coverage from "../Pages/Coverage/Coverage";
+import LoadingSpinner from "../Pages/shared/LoadingSpinner";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +15,12 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "/coverage",
+        Component: Coverage,
+        loader: () => fetch('./branches.json'),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>
       },
     ],
   },
@@ -26,8 +34,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/register",
-        Component: Register
-      }
+        Component: Register,
+      },
     ],
   },
 ]);

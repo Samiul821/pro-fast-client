@@ -22,13 +22,39 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <NavLink className="font-medium text-[16px] text-[#606060]" to="/">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "font-medium text-[16px] text-primary border-b-2 border-primary"
+              : "font-medium text-[16px] text-[#606060] hover:text-primary"
+          }
+        >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink className="font-medium text-[16px] text-[#606060]" to="/about">
-          About Us
+        <NavLink
+          to="/coverage"
+          className={({ isActive }) =>
+            isActive
+              ? "font-medium text-[16px] text-primary border-b-2 border-primary"
+              : "font-medium text-[16px] text-[#606060] hover:text-primary"
+          }
+        >
+          Coverage
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/track-order"
+          className={({ isActive }) =>
+            isActive
+              ? "font-medium text-[16px] text-primary border-b-2 border-primary"
+              : "font-medium text-[16px] text-[#606060] hover:text-primary"
+          }
+        >
+          Track Order
         </NavLink>
       </li>
     </>
@@ -78,6 +104,14 @@ const Navbar = () => {
       <div className="navbar-end flex items-center gap-2">
         {/* Button on md and up */}
         <div className="hidden md:flex gap-4">
+          <div className="flex items-center gap-1">
+            <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
+              Be a rider
+            </Link>
+            {/* <Link className="p-3 bg-[#1F1F1F] rounded-full text-neutral">
+              <FiArrowUpRight className="w-8 h-8" />
+            </Link> */}
+          </div>
           {user ? (
             <button
               onClick={handleLogout}
@@ -93,14 +127,6 @@ const Navbar = () => {
               Sign In
             </Link>
           )}
-          <div className="flex items-center gap-1">
-            <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
-              Be a rider
-            </Link>
-            <Link className="p-3 bg-[#1F1F1F] rounded-full text-neutral">
-              <FiArrowUpRight className="w-8 h-8" />
-            </Link>
-          </div>
         </div>
 
         {/* Hamburger on mobile (sm only) */}
@@ -127,6 +153,11 @@ const Navbar = () => {
           >
             {navItems}
             <li className="mt-2">
+              <div className="flex items-center gap-1">
+                <Link className="text-xl font-bold w-full py-4 px-8 rounded-xl bg-neutral">
+                  Be a rider
+                </Link>
+              </div>
               {user ? (
                 <button
                   onClick={handleLogout}
@@ -142,11 +173,6 @@ const Navbar = () => {
                   Sign In
                 </Link>
               )}
-              <div className="flex items-center gap-1">
-                <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
-                  Be a rider
-                </Link>
-              </div>
             </li>
           </ul>
         </div>
