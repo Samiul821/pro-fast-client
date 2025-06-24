@@ -6,6 +6,7 @@ import AuthLayout from "../layout/AuthLayout";
 import Register from "../Pages/Auth/Register/Register";
 import Coverage from "../Pages/Coverage/Coverage";
 import LoadingSpinner from "../Pages/shared/LoadingSpinner";
+import AddParcelForm from "../Pages/AddParcel/AddParcel";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
         loader: () => fetch('./branches.json'),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>
       },
+      {
+        path: "/add-parcel",
+        Component: AddParcelForm
+      }
     ],
   },
   {

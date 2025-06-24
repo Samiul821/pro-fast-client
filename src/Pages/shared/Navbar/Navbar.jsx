@@ -47,6 +47,18 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
+          to="/add-parcel"
+          className={({ isActive }) =>
+            isActive
+              ? "font-medium text-[16px] text-primary border-b-2 border-primary"
+              : "font-medium text-[16px] text-[#606060] hover:text-primary"
+          }
+        >
+          Pricing
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/track-order"
           className={({ isActive }) =>
             isActive

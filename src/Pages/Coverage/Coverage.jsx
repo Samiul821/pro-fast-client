@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BangladeshMap from "./BangladeshMap";
 import { useLoaderData } from "react-router-dom";
 import SearchBox from "./SearchBox";
+import toast from "react-hot-toast";
 
 const Coverage = () => {
   const branches = useLoaderData();
@@ -16,7 +17,7 @@ const Coverage = () => {
       setActiveCoords([district.latitude, district.longitude]);
       setActiveDistrict(district.district);
     } else {
-      alert("District not found!");
+      toast.error("District not found!");
     }
   };
 
