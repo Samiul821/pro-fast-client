@@ -3,6 +3,15 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+
+const generateTrackingID = () => {
+  const date = new Date();
+  const datePart = date.toISOString().split("T")[0].replace(/-/g, "");
+  const rand = Math.random().toString(36).substring(2, 7).toUpperCase();
+  return `PCL-${datePart}-${rand}`;
+};
 
 const SendParcel = () => {
   const {
@@ -12,6 +21,9 @@ const SendParcel = () => {
     formState: { errors },
     reset,
   } = useForm();
+
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   const serviceCenters = useLoaderData();
   const uniqueRegions = [...new Set(serviceCenters.map((w) => w.region))];
@@ -113,12 +125,34 @@ const SendParcel = () => {
           ...data,
           type: isDocument ? "document" : "non-document",
           cost: baseCost,
-          creation_date: new Date().toISOString(),
+          created_by: user?.email, // ✅ current logged-in user
+          payment_status: "unpaid",
+          delivery_status: "not_collected",
+          creation_date: new Date().toISOString(), // ✅ Good for DB & UI
+          tracking_id: generateTrackingID(),
         };
 
         console.log("Saving to DB:", parcelData);
-        toast.success("Parcel successfully created!");
-        reset();
+
+        axiosSecure.post("/add-parcels", parcelData).then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId) {
+            toast.success("Parcel successfully created!");
+
+            setTimeout(() => {
+              Swal.fire({
+                title: "Redirecting...",
+                text: "Proceeding to payment gateway.",
+                icon: "success",
+                timer: 3000,
+                showConfirmButton: true,
+                confirmButtonText: "OK",
+              });
+            }, 200);
+          }
+          reset()
+        });
+        // save data to the server
       } else {
         toast.info("You can edit your parcel details.");
       }
