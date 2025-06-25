@@ -35,18 +35,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/coverage"
-          className={({ isActive }) =>
-            isActive
-              ? "font-medium text-[16px] text-primary border-b-2 border-primary"
-              : "font-medium text-[16px] text-[#606060] hover:text-primary"
-          }
-        >
-          Coverage
-        </NavLink>
-      </li>
+
       <li>
         <NavLink
           to="/add-parcel"
@@ -59,6 +48,36 @@ const Navbar = () => {
           Pricing
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/coverage"
+          className={({ isActive }) =>
+            isActive
+              ? "font-medium text-[16px] text-primary border-b-2 border-primary"
+              : "font-medium text-[16px] text-[#606060] hover:text-primary"
+          }
+        >
+          Coverage
+        </NavLink>
+      </li>
+
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive
+                  ? "font-medium text-[16px] text-primary border-b-2 border-primary"
+                  : "font-medium text-[16px] text-[#606060] hover:text-primary"
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        </>
+      )}
+
       <li>
         <NavLink
           to="/track-order"

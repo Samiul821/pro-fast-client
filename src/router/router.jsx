@@ -9,6 +9,7 @@ import LoadingSpinner from "../Pages/shared/LoadingSpinner";
 
 import PrivateRoute from "../routes/PrivateRoute";
 import SendParcel from "../Pages/AddParcel/SendParcel";
+import DashboardLayout from "../layout/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -50,5 +51,14 @@ export const router = createBrowserRouter([
         Component: Register,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [],
   },
 ]);
