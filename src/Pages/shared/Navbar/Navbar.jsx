@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ProFastLogo from "../ProfastLogo/ProFastLogo";
 import { FiArrowUpRight } from "react-icons/fi";
 import useAuth from "../../../hooks/useAuth";
@@ -7,11 +7,13 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logOut()
       .then(() => {
         toast.success("Logged out successfully!");
+        navigate("/", { replace: true });
       })
       .catch((error) => {
         toast.error("Failed to log out. Please try again.");

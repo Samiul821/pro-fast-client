@@ -26,10 +26,10 @@ const Register = () => {
         updateUser({ displayName: data.name })
           .then(() => {
             setUser({ ...user, displayName: data.name });
+            const from = location.state?.from?.pathname || "/";
+            navigate(from, { replace: true });
             console.log("User created successfully:", user);
             toast.success("User created successfully!");
-            // Redirect to the previous page or home page
-            navigate(`${location.state?.from || "/"}`, { replace: true });
           })
           .catch((error) => {
             console.error("Error updating user profile:", error);

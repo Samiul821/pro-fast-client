@@ -13,11 +13,12 @@ const SocialLogin = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
+        const from = location.state?.from?.pathname || "/";
+        navigate(from, { replace: true });
+
         console.log("Google Sign In User:", user);
         toast.success("Logged in successfully with Google!");
         // Redirect to the previous page or home page
-        const redirectPath = location?.state?.from || "/";
-        navigate(redirectPath, { replace: true });
       })
       .catch((error) => {
         console.error("Google Sign In Error:", error);

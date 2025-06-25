@@ -6,7 +6,9 @@ import AuthLayout from "../layout/AuthLayout";
 import Register from "../Pages/Auth/Register/Register";
 import Coverage from "../Pages/Coverage/Coverage";
 import LoadingSpinner from "../Pages/shared/LoadingSpinner";
-import AddParcelForm from "../Pages/AddParcel/AddParcel";
+
+import PrivateRoute from "../routes/PrivateRoute";
+import SendParcel from "../Pages/AddParcel/SendParcel";
 
 export const router = createBrowserRouter([
   {
@@ -20,13 +22,19 @@ export const router = createBrowserRouter([
       {
         path: "/coverage",
         Component: Coverage,
-        loader: () => fetch('./branches.json'),
-        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>
+        loader: () => fetch("./branches.json"),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "/add-parcel",
-        Component: AddParcelForm
-      }
+        element: (
+          <PrivateRoute>
+            <SendParcel></SendParcel>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("./branches.json"),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+      },
     ],
   },
   {

@@ -23,7 +23,9 @@ const Login = () => {
         const user = result.user;
         toast.success("User logged in successfully!");
         // Redirect to the previous page or home page
-        navigate(`${location.state?.from || "/"}`, { replace: true });
+        const from = location.state?.from?.pathname || "/";
+        navigate(from, { replace: true });
+
         console.log("User logged in successfully:", user);
       })
       .catch((error) => {
