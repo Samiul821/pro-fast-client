@@ -15,6 +15,7 @@ const Login = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const from = location.state?.form || "/";
 
   const onSubmit = (data) => {
     console.log(data);
@@ -23,9 +24,7 @@ const Login = () => {
         const user = result.user;
         toast.success("User logged in successfully!");
         // Redirect to the previous page or home page
-        const from = location.state?.from?.pathname || "/";
-        navigate(from, { replace: true });
-
+        navigate(from);
         console.log("User logged in successfully:", user);
       })
       .catch((error) => {
