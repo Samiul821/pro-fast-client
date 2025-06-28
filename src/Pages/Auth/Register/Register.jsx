@@ -5,6 +5,8 @@ import imageUpload from "../../../assets/image-upload-icon.png";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import SocialLogin from "../SocialLogin.jsx/SocialLogin";
+import { useState } from "react";
+import axios from "axios";
 
 const Register = () => {
   const {
@@ -15,6 +17,8 @@ const Register = () => {
   const { createUser, updateUser, setUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -22,10 +26,17 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
 
+        // update userinfo in the database
+        const userInfo = {
+          email: data.email,
+          role: 'user', //defult role
+          created_at: new Date().toISOString()
+        }
+
         // Update user profile with name
-        updateUser({ displayName: data.name })
+        updateUser({ displayName: data.name, photoURL: imageFile })
           .then(() => {
-            setUser({ ...user, displayName: data.name });
+            setUser({ ...user, displayName: data.name, photoURL: imageFile });
             const from = location.state?.from?.pathname || "/";
             navigate(from, { replace: true });
             console.log("User created successfully:", user);
@@ -42,6 +53,27 @@ const Register = () => {
       });
   };
 
+  const handelImageUpload = async (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setImageFile(file); // actual file for uploading
+      setSelectedImage(URL.createObjectURL(file)); // preview
+      console.log("Selected image file:", file);
+    } else {
+      console.warn("No file selected");
+    }
+
+    const fromData = new FormData();
+    fromData.append("image", file);
+    const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_image_upload_key
+    }`;
+    const res = await axios.post(imageUploadUrl, fromData);
+
+    setImageFile(res.data.data.url);
+  };
+
   return (
     <div className="bg-white w-full">
       <h2 className="text-4xl md:text-[42px] inter font-bold md:font-extrabold text-[#000000] mb-2">
@@ -52,8 +84,34 @@ const Register = () => {
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Image Upload Field */}
         <div>
-          <img src={imageUpload} alt="" />
+          <label className="label">
+            <span className="label-text text-[#0F172A] font-medium lxgw-marker-gothic">
+              Upload Profile Picture
+            </span>
+          </label>
+          <div className="flex items-center gap-4">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handelImageUpload}
+              className="file-input file-input-bordered file-input-sm"
+            />
+            {selectedImage ? (
+              <img
+                src={selectedImage}
+                alt="Preview"
+                className="w-14 h-14 object-cover rounded-full border"
+              />
+            ) : (
+              <img
+                src={imageUpload}
+                alt="Upload icon"
+                className="w-14 h-14 object-cover rounded-full"
+              />
+            )}
+          </div>
         </div>
 
         {/* Name */}

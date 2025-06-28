@@ -6,6 +6,13 @@ import { AiOutlineBars } from "react-icons/ai";
 import useAuth from "../hooks/useAuth";
 import ProFastLogo from "../Pages/shared/ProfastLogo/ProFastLogo";
 import toast from "react-hot-toast";
+import {
+  FaHome,
+  FaBoxOpen,
+  FaMoneyCheckAlt,
+  FaSearchLocation,
+  FaUserEdit,
+} from "react-icons/fa";
 
 const DashboardLayout = () => {
   const { logOut } = useAuth();
@@ -72,28 +79,59 @@ const DashboardLayout = () => {
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `block px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                       isActive
                         ? "bg-neutral text-[#606060] font-bold"
                         : "text-gray-700 hover:bg-gray-200 hover:text-black"
                     }`
                   }
                 >
-                  Home
+                  <FaHome /> Home
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
                   to="myParcels"
                   className={({ isActive }) =>
-                    `block px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                       isActive
                         ? "bg-neutral text-[#606060] font-bold"
                         : "text-gray-700 hover:bg-gray-200 hover:text-black"
                     }`
                   }
                 >
-                  My Parcels
+                  <FaBoxOpen /> My Parcels
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="payment-history"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                      isActive
+                        ? "bg-neutral text-[#606060] font-bold"
+                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                    }`
+                  }
+                >
+                  <FaMoneyCheckAlt /> Payment History
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="track"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                      isActive
+                        ? "bg-neutral text-[#606060] font-bold"
+                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                    }`
+                  }
+                >
+                  <FaSearchLocation /> Track a Package
                 </NavLink>
               </li>
             </ul>
@@ -104,17 +142,18 @@ const DashboardLayout = () => {
           <hr className="mb-2" />
 
           <NavLink
-            to="profile"
+            to="update-profile"
             className={({ isActive }) =>
-              `block px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+              `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                 isActive
                   ? "bg-blue-500 text-white"
                   : "text-gray-700 hover:bg-gray-200 hover:text-black"
               }`
             }
           >
-            Profile
+            <FaUserEdit /> Update Profile
           </NavLink>
+
           <button
             onClick={handleLogout}
             className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"
@@ -126,7 +165,7 @@ const DashboardLayout = () => {
         </div>
       </div>
       {/* Right Side: Dashboard Dynamic Content */}
-      <div className="flex-1  md:ml-64">
+      <div className="flex-1  md:ml-64 lg:px-[5%]">
         <div className="p-5">
           {/* Outlet for dynamic contents */}
           <Outlet />

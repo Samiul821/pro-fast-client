@@ -4,9 +4,11 @@ import ProFastLogo from "../ProfastLogo/ProFastLogo";
 import { FiArrowUpRight } from "react-icons/fi";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -145,21 +147,59 @@ const Navbar = () => {
               <FiArrowUpRight className="w-8 h-8" />
             </Link> */}
           </div>
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-red-400 hover:text-white transition-colors duration-300 cursor-pointer"
-            >
-              Logout
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-neutral hover:text-[#1F1F1F] transition-colors duration-300"
-            >
-              Sign In
-            </Link>
-          )}
+          <div className="hidden md:flex items-center gap-4 relative">
+            <>
+              {user ? (
+                <div className="relative">
+                  {/* Profile Image */}
+                  <img
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    src={user?.photoURL || "/default-avatar.png"}
+                    alt="Profile"
+                    className="w-[52px] h-[52px] rounded-full border cursor-pointer"
+                  />
+
+                  {/* Dropdown */}
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
+                      <div className="px-4 py-3 text-sm text-gray-700">
+                        <span className="block font-semibold">
+                          {user.displayName || "No Name"}
+                        </span>
+                        <span className="block text-xs text-gray-500">
+                          {user.email}
+                        </span>
+                      </div>
+                      <hr />
+                      <Link
+                        to="/dashboard"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        Dashboard
+                      </Link>
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setDropdownOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="text-xl text-[#606060] font-bold py-4 px-8 rounded-xl bg-secondary border border-[#DADADA] hover:bg-neutral hover:text-[#1F1F1F] transition-colors duration-300"
+                >
+                  Sign In
+                </Link>
+              )}
+            </>
+          </div>
         </div>
 
         {/* Hamburger on mobile (sm only) */}
