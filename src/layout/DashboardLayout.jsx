@@ -12,6 +12,8 @@ import {
   FaMoneyCheckAlt,
   FaSearchLocation,
   FaUserEdit,
+  FaHourglassHalf,
+  FaMotorcycle,
 } from "react-icons/fa";
 
 const DashboardLayout = () => {
@@ -132,6 +134,34 @@ const DashboardLayout = () => {
                   }
                 >
                   <FaSearchLocation /> Track a Package
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="activeRiders"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                      isActive
+                        ? "bg-neutral text-[#606060] font-bold"
+                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                    }`
+                  }
+                >
+                  <FaMotorcycle /> Active Riders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="pendingRiders"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                      isActive
+                        ? "bg-neutral text-[#606060] font-bold"
+                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                    }`
+                  }
+                >
+                  <FaHourglassHalf /> Pending Riders
                 </NavLink>
               </li>
             </ul>

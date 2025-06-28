@@ -3,20 +3,32 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAxios from "../../../hooks/useAxios";
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosInstance = useAxios();
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then((result) => {
+      .then(async (result) => {
         const user = result.user;
         const from = location.state?.from?.pathname || "/";
         navigate(from, { replace: true });
 
         console.log("Google Sign In User:", user);
+        const userInfo = {
+          email: user.email,
+          role: "user", //defult role
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+
+        const res = await axiosInstance.post("/users", userInfo);
+        console.log('user update info', res.data);
+
         toast.success("Logged in successfully with Google!");
         // Redirect to the previous page or home page
       })

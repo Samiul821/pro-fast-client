@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import SocialLogin from "../SocialLogin.jsx/SocialLogin";
 import { useState } from "react";
 import axios from "axios";
+import useAxios from "../../../hooks/useAxios";
 
 const Register = () => {
   const {
@@ -19,23 +20,28 @@ const Register = () => {
   const location = useLocation();
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const axiosInstance = useAxios();
 
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
-      .then((result) => {
+      .then(async (result) => {
         const user = result.user;
 
         // update userinfo in the database
         const userInfo = {
           email: data.email,
-          role: 'user', //defult role
-          created_at: new Date().toISOString()
-        }
+          role: "user", //defult role
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+
+        const userRes = await axiosInstance.post("/users", userInfo);
+        console.log(userRes.data);
 
         // Update user profile with name
         updateUser({ displayName: data.name, photoURL: imageFile })
-          .then(() => {
+          .then(async () => {
             setUser({ ...user, displayName: data.name, photoURL: imageFile });
             const from = location.state?.from?.pathname || "/";
             navigate(from, { replace: true });

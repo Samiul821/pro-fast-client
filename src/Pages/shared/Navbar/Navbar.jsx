@@ -67,6 +67,18 @@ const Navbar = () => {
         <>
           <li>
             <NavLink
+              to="/beARider"
+              className={({ isActive }) =>
+                isActive
+                  ? "font-medium text-[16px] text-primary border-b-2 border-primary"
+                  : "font-medium text-[16px] text-[#606060] hover:text-primary"
+              }
+            >
+              Be a Rider
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/dashboard"
               className={({ isActive }) =>
                 isActive
@@ -82,7 +94,7 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          to="/track-order"
+          to="/track"
           className={({ isActive }) =>
             isActive
               ? "font-medium text-[16px] text-primary border-b-2 border-primary"
@@ -97,8 +109,8 @@ const Navbar = () => {
   return (
     <div className="navbar bg-secondary shadow-sm rounded-2xl px-4 lg:px-8">
       {/* Navbar Start */}
-      <div className="flex items-center gap-2 navbar-start">
-        {/* Hamburger on md and below (hidden on lg) */}
+      <div className="flex items-center gap-2 lg:gap-12 navbar-start">
+        {/* Hamburger for small screen */}
         <div className="dropdown hidden lg:hidden md:block dropdown-start">
           <label tabIndex={0} className="btn btn-ghost">
             <svg
@@ -128,11 +140,11 @@ const Navbar = () => {
         <Link to="/" className="text-xl font-extrabold text-[#303030]">
           <ProFastLogo />
         </Link>
-      </div>
 
-      {/* Navbar Center (only on lg and up) */}
-      <div className="navbar-start hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navItems}</ul>
+        {/* Nav items (lg screen only) */}
+        <div className="hidden lg:flex items-center gap-6">
+          <ul className="flex items-center gap-6">{navItems}</ul>
+        </div>
       </div>
 
       {/* Navbar End */}
@@ -140,8 +152,11 @@ const Navbar = () => {
         {/* Button on md and up */}
         <div className="hidden md:flex gap-4">
           <div className="flex items-center gap-1">
-            <Link className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral">
-              Be a rider
+            <Link
+              to="/beARider"
+              className="text-xl font-bold py-4 px-8 rounded-xl bg-neutral"
+            >
+              Be a Rider
             </Link>
             {/* <Link className="p-3 bg-[#1F1F1F] rounded-full text-neutral">
               <FiArrowUpRight className="w-8 h-8" />
