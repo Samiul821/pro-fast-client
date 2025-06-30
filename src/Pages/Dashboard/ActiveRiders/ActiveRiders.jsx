@@ -36,7 +36,7 @@ const ActiveRiders = () => {
 
     try {
       await axiosSecure.patch(`/riders/${id}/status`, {
-        status: "deactivated",
+        status: "pending",
       });
       Swal.fire("Done", "Rider has been deactivated", "success");
       refetch();

@@ -14,11 +14,17 @@ import {
   FaUserEdit,
   FaHourglassHalf,
   FaMotorcycle,
+  FaUserShield,
+  FaShippingFast,
 } from "react-icons/fa";
+import useUserRole from "../hooks/useUserRole";
 
 const DashboardLayout = () => {
   const { logOut } = useAuth();
   const [isActive, setIsActive] = useState(false);
+
+  const { role, roleLoading } = useUserRole();
+  console.log(role);
 
   const navigate = useNavigate();
 
@@ -136,34 +142,66 @@ const DashboardLayout = () => {
                   <FaSearchLocation /> Track a Package
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="activeRiders"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
-                      isActive
-                        ? "bg-neutral text-[#606060] font-bold"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
-                    }`
-                  }
-                >
-                  <FaMotorcycle /> Active Riders
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="pendingRiders"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
-                      isActive
-                        ? "bg-neutral text-[#606060] font-bold"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
-                    }`
-                  }
-                >
-                  <FaHourglassHalf /> Pending Riders
-                </NavLink>
-              </li>
+              {!roleLoading && role === "admin" && (
+                <>
+                  <li>
+                    <NavLink
+                      to="assign-rider"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaShippingFast /> Assign Rider
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="activeRiders"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaMotorcycle /> Active Riders
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="pendingRiders"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaHourglassHalf /> Pending Riders
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="makeAdmin"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaUserShield /> Make Admin
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
