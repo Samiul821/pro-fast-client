@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useTrackingLogger from "../../hooks/useTrackingLogger";
 
 const generateTrackingID = () => {
   const date = new Date();
@@ -24,6 +25,8 @@ const SendParcel = () => {
 
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const { logTracking } = useTrackingLogger();
 
   const serviceCenters = useLoaderData();
   const uniqueRegions = [...new Set(serviceCenters.map((w) => w.region))];
@@ -121,36 +124,49 @@ const SendParcel = () => {
       if (result.isConfirmed) {
         setCost(baseCost);
 
+        const tracking_id = generateTrackingID();
+
+        // ✅ parcelType & isDocument calculated directly from submitted data
+        const parcelType = data.parcelType;
+        const isDocument = parcelType === "document";
+
         const parcelData = {
           ...data,
           type: isDocument ? "document" : "non-document",
           cost: baseCost,
-          created_by: user?.email, // ✅ current logged-in user
+          created_by: user?.email,
           payment_status: "unpaid",
           delivery_status: "not_collected",
-          creation_date: new Date().toISOString(), // ✅ Good for DB & UI
-          tracking_id: generateTrackingID(),
+          creation_date: new Date().toISOString(),
+          tracking_id: tracking_id,
         };
 
         console.log("Saving to DB:", parcelData);
 
-        axiosSecure.post("/add-parcels", parcelData).then((res) => {
+        axiosSecure.post("/add-parcels", parcelData).then(async (res) => {
           console.log(res.data);
           if (res.data.insertedId) {
             toast.success("Parcel successfully created!");
 
-            setTimeout(() => {
-              Swal.fire({
-                title: "Redirecting...",
-                text: "Proceeding to payment gateway.",
-                icon: "success",
-                timer: 3000,
-                showConfirmButton: true,
-                confirmButtonText: "OK",
-              });
-            }, 200);
+            Swal.fire({
+              title: "Redirecting...",
+              text: "Proceeding to payment gateway.",
+              icon: "success",
+              timer: 3000,
+              showConfirmButton: true,
+              confirmButtonText: "OK",
+            });
+
+            await logTracking({
+              tracking_id: parcelData.tracking_id,
+              status: "parcel_created",
+              details: `Created by ${user.displayName}`,
+              updated_by: user.email,
+            });
+
+            navigate("/dashboard/myParcels");
           }
-          reset()
+          reset();
         });
         // save data to the server
       } else {

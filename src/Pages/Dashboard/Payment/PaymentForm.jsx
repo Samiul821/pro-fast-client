@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useTrackingLogger from "../../../hooks/useTrackingLogger";
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -13,6 +14,7 @@ const PaymentForm = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const { logTracking } = useTrackingLogger();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -83,7 +85,7 @@ const PaymentForm = () => {
         setError("");
         if (result.paymentIntent.status === "succeeded") {
           console.log("Payment succeeded");
-          const transactionId = result.paymentIntent.id
+          const transactionId = result.paymentIntent.id;
           // step-4: mark parcel paid also create payment history
           const paymentData = {
             parcelId,
@@ -103,6 +105,13 @@ const PaymentForm = () => {
               title: "Payment Successful!",
               html: `<strong>Transaction ID:</strong> <code>${transactionId}</code>`,
               confirmButtonText: "Go to My Parcels",
+            });
+
+            await logTracking({
+              tracking_id: parcelInfo.tracking_id,
+              status: "payment_done",
+              details: `Paid by ${user.displayName}`,
+              updated_by: user.email,
             });
 
             // ✅ Redirect to /myParcels

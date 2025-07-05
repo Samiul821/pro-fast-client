@@ -16,6 +16,9 @@ import {
   FaMotorcycle,
   FaUserShield,
   FaShippingFast,
+  FaClipboardList,
+  FaCheckCircle,
+  FaWallet,
 } from "react-icons/fa";
 import useUserRole from "../hooks/useUserRole";
 
@@ -83,6 +86,7 @@ const DashboardLayout = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-2">
             <ul className="space-y-1">
+              {/* home links */}
               <li>
                 <NavLink
                   to="/"
@@ -98,50 +102,105 @@ const DashboardLayout = () => {
                 </NavLink>
               </li>
 
-              <li>
-                <NavLink
-                  to="myParcels"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
-                      isActive
-                        ? "bg-neutral text-[#606060] font-bold"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
-                    }`
-                  }
-                >
-                  <FaBoxOpen /> My Parcels
-                </NavLink>
-              </li>
+              {/* user links */}
+              {!roleLoading && role === "user" && (
+                <>
+                  <li>
+                    <NavLink
+                      to="myParcels"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaBoxOpen /> My Parcels
+                    </NavLink>
+                  </li>
 
-              <li>
-                <NavLink
-                  to="payment-history"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
-                      isActive
-                        ? "bg-neutral text-[#606060] font-bold"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
-                    }`
-                  }
-                >
-                  <FaMoneyCheckAlt /> Payment History
-                </NavLink>
-              </li>
+                  <li>
+                    <NavLink
+                      to="payment-history"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaMoneyCheckAlt /> Payment History
+                    </NavLink>
+                  </li>
 
-              <li>
-                <NavLink
-                  to="track"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
-                      isActive
-                        ? "bg-neutral text-[#606060] font-bold"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black"
-                    }`
-                  }
-                >
-                  <FaSearchLocation /> Track a Package
-                </NavLink>
-              </li>
+                  <li>
+                    <NavLink
+                      to="track"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaSearchLocation /> Track a Package
+                    </NavLink>
+                  </li>
+                </>
+              )}
+
+              {/* rider links */}
+              {!roleLoading && role === "rider" && (
+                <>
+                  <li>
+                    <NavLink
+                      to="pending-deliveries"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaClipboardList /> Pending Deliveries
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="completed-deliveries"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaCheckCircle /> Completed Deliveries
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="my-earnings"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
+                          isActive
+                            ? "bg-neutral text-[#606060] font-bold"
+                            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                        }`
+                      }
+                    >
+                      <FaWallet /> My Earnings
+                    </NavLink>
+                  </li>
+                </>
+              )}
+
+              {/* admin link */}
               {!roleLoading && role === "admin" && (
                 <>
                   <li>
