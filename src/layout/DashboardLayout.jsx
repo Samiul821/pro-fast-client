@@ -89,7 +89,8 @@ const DashboardLayout = () => {
               {/* home links */}
               <li>
                 <NavLink
-                  to="/"
+                  to="/dashboard"
+                  end
                   className={({ isActive }) =>
                     `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                       isActive
@@ -107,7 +108,7 @@ const DashboardLayout = () => {
                 <>
                   <li>
                     <NavLink
-                      to="myParcels"
+                      to="/dashboard/myParcels"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -122,7 +123,7 @@ const DashboardLayout = () => {
 
                   <li>
                     <NavLink
-                      to="payment-history"
+                      to="/dashboard/payment-history"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -137,7 +138,7 @@ const DashboardLayout = () => {
 
                   <li>
                     <NavLink
-                      to="track"
+                      to="/dashboard/track"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -157,7 +158,7 @@ const DashboardLayout = () => {
                 <>
                   <li>
                     <NavLink
-                      to="pending-deliveries"
+                      to="/dashboard/pending-deliveries"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -171,7 +172,7 @@ const DashboardLayout = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="completed-deliveries"
+                      to="/dashboard/completed-deliveries"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -185,7 +186,7 @@ const DashboardLayout = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="my-earnings"
+                      to="/dashboard/my-earnings"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -205,7 +206,7 @@ const DashboardLayout = () => {
                 <>
                   <li>
                     <NavLink
-                      to="assign-rider"
+                      to="/dashboard/assign-rider"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -219,7 +220,7 @@ const DashboardLayout = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="activeRiders"
+                      to="/dashboard/activeRiders"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -233,7 +234,7 @@ const DashboardLayout = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="pendingRiders"
+                      to="/dashboard/pendingRiders"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
@@ -247,7 +248,7 @@ const DashboardLayout = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="makeAdmin"
+                      to="/dashboard/makeAdmin"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition duration-200 inter ${
                           isActive
